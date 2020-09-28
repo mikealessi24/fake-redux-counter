@@ -1,36 +1,14 @@
 import React, { useReducer } from "react";
-
-const INCREMENT_COUNTER = "INCREMENT_COUNTER";
-const DECREMENT_COUNTER = "DECREMENT_COUNTER";
-const UPDATE_N = "UPDATE_N";
-const ENABLE_BUTTONS = "ENABLE_BUTTONS";
-
-function incrementCounter(n) {
-  return {
-    type: INCREMENT_COUNTER,
-    n: n,
-  };
-}
-
-function decrementCounter(n) {
-  return {
-    type: DECREMENT_COUNTER,
-    n: n,
-  };
-}
-
-function updateN(n) {
-  return {
-    type: UPDATE_N,
-    n: n,
-  };
-}
-
-function enableButtons() {
-  return {
-    type: ENABLE_BUTTONS,
-  };
-}
+import {
+  INCREMENT_COUNTER,
+  DECREMENT_COUNTER,
+  UPDATE_N,
+  ENABLE_BUTTONS,
+  incrementCounter,
+  decrementCounter,
+  updateN,
+  enableButtons,
+} from "./actions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -59,10 +37,10 @@ function App() {
   return (
     <div>
       <div>{state.count}</div>
-      <label>increment by n: </label>
+      <label>increment by n value: </label>
       <input
         onChange={(event) => dispatch(updateN(Number(event.target.value)))}
-        placeholder="Default n = 1"
+        placeholder={state.n}
       />
       <button
         onClick={() => dispatch(incrementCounter())}
