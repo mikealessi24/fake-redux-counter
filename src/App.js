@@ -6,38 +6,35 @@ import {
   enableButtons,
 } from "./actions";
 import { reducer } from "./reducers";
-
-const initialState = {
-  count: 0,
-  n: 1,
-  enabled: true,
-};
+import { CreateStore } from "./store";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
+  const store = CreateStore(reducer);
+  console.log(store.getState());
   return (
     <div>
-      <div>{state.count}</div>
+      <div>{store.getState().count}</div>
       <label>increment by n value: </label>
       <input
-        onChange={(event) => dispatch(updateN(Number(event.target.value)))}
-        placeholder={state.n}
+        onChange={(event) =>
+          store.dispatch(updateN(Number(event.target.value)))
+        }
+        placeholder={store.getState().n}
       />
       <button
-        onClick={() => dispatch(incrementCounter())}
-        disabled={!state.enabled}
+        onClick={() => store.dispatch(incrementCounter())}
+        disabled={!store.getState().enabled}
       >
         Increment
       </button>
       <button
-        onClick={() => dispatch(decrementCounter())}
-        disabled={!state.enabled}
+        onClick={() => store.dispatch(decrementCounter())}
+        disabled={!store.getState().enabled}
       >
         Decrement
       </button>
-      <button onClick={() => dispatch(enableButtons())}>
-        {state.enabled ? "Disable" : "Enable"}
+      <button onClick={() => store.dispatch(enableButtons())}>
+        {!store.getState().enabled ? "Disable" : "Enable"}
       </button>
     </div>
   );
