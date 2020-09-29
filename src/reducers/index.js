@@ -5,7 +5,13 @@ import {
   ENABLE_BUTTONS,
 } from "../actions";
 
-export const reducer = (state, action) => {
+const initialState = {
+  count: 0,
+  n: 1,
+  enabled: true,
+};
+
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT_COUNTER:
       return { ...state, count: state.count + state.n };
